@@ -1,0 +1,8 @@
+<ul>
+  <%@files.each do |f|%>
+    <li>
+      <%path = f.sub(Wup.webroot, '')%>
+      <a href="<%=path%>"><%=f%></a>
+    </li>
+  <%end%>
+</ul>

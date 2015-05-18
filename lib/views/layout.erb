@@ -1,0 +1,17 @@
+<p>
+  <span> current: <%=@path%> </span>
+  <%unless @is_webroot%>
+    &nbsp;
+    <a href='<%=@uppath%>'>..</a>
+    &nbsp;
+    <a href='/'>Top</a>
+  <%end%>
+  &nbsp;
+  <a href='/recent'>Recent</a>
+  <!--
+  &nbsp;
+  <a href='/most'>Most Used</a>
+  -->
+</p>
+
+<%=yield%>

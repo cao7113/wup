@@ -1,5 +1,15 @@
 # 构建ruby版简易web server
 
+
+## todo
+
+* 最近使用
+* 统计使用频率
+* gem 工具化
+* 支持行号
+* 代码高亮
+* 便捷访问控制 
+
 #ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000, :DocumentRoot => Dir.pwd).start'
 #Rack::Directory
 alias fileshare="python -m SimpleHTTPServer 8844"

@@ -1,7 +1,9 @@
 #!/usr/bin/env rackup
 #\ -E deployment
 
-use Rack::ContentLength
+require 'byebug'
 
-app = Rack::Directory.new Dir.pwd
-run app
+$:.unshift File.expand_path('../lib', __FILE__)
+require 'web'
+
+run Sinatra::Application
