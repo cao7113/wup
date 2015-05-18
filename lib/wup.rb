@@ -10,7 +10,7 @@ module Wup
     end
   end
 
-  self.webroot = File.expand_path(ENV['WUP_WEBROOT']||'~/data/public')
+  self.webroot = File.expand_path(ENV['WUP_WEBROOT']||'/data/public')
   self.redis = Redis.new #support REDIS_URL environment variable 
 
   module FileTool

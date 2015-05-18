@@ -31,7 +31,7 @@ get '/?*' do
     if ext =~ /\.(md|markdown)/
       @body = Marker.marker.render(File.read(@rpath))
       erb :markdown
-    elsif ext =~ /\.(rb|erb)/ or ext == ''
+    elsif ext =~ /\.(rb|erb|yml)/ or ext == '' #todo from config file
       @body = File.read(@rpath)
       erb :file
     else

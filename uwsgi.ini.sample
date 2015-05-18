@@ -1,0 +1,25 @@
+[uwsgi]
+procname-prefix = wup-
+auto-procname = true
+
+http-socket = :8222
+http-socket-modifier1 = 7
+#http = xxx
+#http-modifier1 = 7
+
+chmod-socket = 666
+master = true
+#processes = 2
+# starting from 4.0, Rails support multiple threads(only for ruby2.0)
+#rbthreads = 4 
+#lazy-apps = true
+chdir = /home/cao/dev/wup
+pidfile = /tmp/wup.pid
+rack = config.ru
+rbrequire = bundler/setup
+env = BUNDLE_GEMFILE=Gemfile
+env = RACK_ENV=production
+env = WUP_WEBROOT=/home/cao/data/public
+logto = /tmp/wup.log
+#allow stdin
+#honour-stdin = true
