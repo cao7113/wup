@@ -1,11 +1,13 @@
 <p>
   <span> current: <%=@path%> </span>
-  <%unless @is_webroot%>
+  <%if @uppath%>
     &nbsp;
-    <a href='<%=@uppath%>'>..</a>
-    &nbsp;
-    <a href='/'>Top</a>
+    <a href='<%=@uppath%>'>..Up</a>
   <%end%>
+  &nbsp;
+  <a href='/'>Root</a>
+  &nbsp;
+  <a href='/top'>Top</a>
   &nbsp;
   <a href='/recent'>Recent</a>
   <!--

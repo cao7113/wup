@@ -6,8 +6,23 @@ get '/most' do
 end
 
 get '/recent' do
-  @files = Wup.redis.lrange("wup:recent:files", 0, 50).uniq
+  @files = Wup.redis.lrange("wup:recent:files", 0, 29).uniq
   erb :recent
+end
+
+get '/top' do
+  @files = Wup.redis.smembers("wup:top:files")
+  erb :top
+end
+
+get '/top/add' do
+  Wup.redis.sadd("wup:top:files", params[:wpath])
+  redirect back
+end
+
+get '/top/remove' do
+  Wup.redis.srem("wup:top:files", params[:wpath])
+  redirect back
 end
 
 get '/?*' do
@@ -24,16 +39,19 @@ get '/?*' do
     @files = Wup::FileTool.subfiles(@rpath, @is_webroot)
     erb :dir
   else
-    #Wup.redis.incr("wup:most:used:#{@path}")
-    Wup.redis.lpush("wup:recent:files", @path)
+    redis = Wup.redis
+    redis.multi do
+      redis.lpush("wup:recent:files", @path)
+      redis.ltrim("wup:recent:files", 0, 29)
+    end
 
     ext = File.extname(@rpath)
-    if ext =~ /\.(md|markdown)/
-      @body = Marker.marker.render(File.read(@rpath))
-      erb :markdown
-    elsif ext =~ /\.(rb|erb|yml)/ or ext == '' #todo from config file
+    if params[:raw] or ext =~ /\.(rb|erb|yml)/ or ext == '' #todo from config file
       @body = File.read(@rpath)
       erb :file
+    elsif ext =~ /\.(md|markdown)/
+      @body = Marker.marker.render(File.read(@rpath))
+      erb :markdown
     else
       #html/js/css/txt/img asset file or send for download
       send_file @rpath

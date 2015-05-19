@@ -2,7 +2,9 @@
   <%@files.each do |f|%>
     <li>
       <%path = f.sub(Wup.webroot, '')%>
-      <a href="<%=path%>"><%=f%></a>
+      <a href="<%=path%>"><%=path%></a>
+      &nbsp;
+      <a href="/top/add?wpath=<%=path%>">Top+</a>
     </li>
   <%end%>
 </ul>
