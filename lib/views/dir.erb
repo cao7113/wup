@@ -8,6 +8,3 @@
     </li>
   <%end%>
 </ul>
-
-<h3> Tops now</h3>
-<%=erb :top, locals: {files: Wup.redis.smembers("wup:top:files")} if @is_webroot%>

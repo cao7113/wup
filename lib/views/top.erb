@@ -1,5 +1,5 @@
 <ul>
-  <%(files||@files rescue @files).each do |f|%>
+  <%@files.each do |f|%>
     <li>
       <a href="<%=f%>"><%=f%></a>
       <a href="/top/remove?wpath=<%=f%>">Top-</a>
