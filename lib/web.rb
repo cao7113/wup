@@ -1,14 +1,14 @@
 require 'sinatra'
 require 'wup'
 
+get '/?' do
+  @files = Wup.redis.smembers("wup:top:files")
+  erb :top
+end
+
 get '/recent' do
   @files = Wup.redis.lrange("wup:recent:files", 0, 29).uniq
   erb :recent
-end
-
-get '/top' do
-  @files = Wup.redis.smembers("wup:top:files")
-  erb :top
 end
 
 get '/top/add' do #post todo
@@ -21,7 +21,7 @@ get '/top/remove' do
   redirect back
 end
 
-get '/?*' do
+get '/wfile/?*' do
   paths = params[:splat]
   wpath = File.join(*paths)
 
