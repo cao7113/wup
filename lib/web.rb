@@ -1,10 +1,6 @@
 require 'sinatra'
 require 'wup'
 
-get '/most' do
-  Wup.redis.keys("wup:most:used:*")
-end
-
 get '/recent' do
   @files = Wup.redis.lrange("wup:recent:files", 0, 29).uniq
   erb :recent
@@ -15,7 +11,7 @@ get '/top' do
   erb :top
 end
 
-get '/top/add' do
+get '/top/add' do #post todo
   Wup.redis.sadd("wup:top:files", params[:wpath])
   redirect back
 end
