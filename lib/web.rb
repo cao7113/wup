@@ -32,7 +32,11 @@ get '/wfile/?*' do
   @uppath = '/' + @uppath unless @uppath == '/'
   
   if @is_dir = File.directory?(@rpath)
-    @files = Wup::FileTool.subfiles(@rpath, @is_webroot)
+    local_request = %w(127.0.0.1).include?(request.ip)
+    @files = Wup::FileTool.subfiles(@rpath, (@is_webroot or local_request))
+    if @is_webroot and !local_request
+      @files.reject!{|d| d =~ /private$/} #config?
+    end
     erb :dir
   else
     redis = Wup.redis
