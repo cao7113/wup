@@ -2,6 +2,6 @@
 
 host=0.0.0.0
 port=${PORT:-8484}
-pidfile=~/tmp/run/wup.pid
+pidfile=/tmp/wup.pid
 bundle exec rackup --server thin --host $host --port $port --pid $pidfile --daemonize
 echo visit: http://$host:$port

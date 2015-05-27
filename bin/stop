@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 
-pidfile=~/tmp/run/wup.pid
+pidfile=/tmp/wup.pid
 if [ -s $pidfile ];then
   kill -9 $(cat $pidfile)
 fi
