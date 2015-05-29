@@ -46,7 +46,7 @@ get '/wfile/?*' do
     end
 
     ext = File.extname(@rpath)
-    if params[:raw] or ext =~ /\.(rb|erb|yml)/ or ext == '' #todo from config file
+    if params[:raw] or ext =~ /\.(rb|erb|yml|sql)/ or ext == '' #todo from config file
       @body = File.read(@rpath)
       erb :file
     elsif ext =~ /\.(md|markdown)/
